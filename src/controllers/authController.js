@@ -26,6 +26,24 @@ export async function singUp (req, res) {
         return
     }
 
+    try {
+        const otherUser = await db.collection('Users').findOne({name: regis.name})
+        const otherUser2 = await db.collection('Users').findOne({email: regis.email})
+        if(otherUser ){
+            res.send('Nome de usuário já existente').status(409)
+            return
+        }
+        if(otherUser2 ){
+            res.send('Email já cadastrado').status(409)
+            return
+        }
+    } catch (error) {
+        res.send(error).status(422)
+        return
+    }
+
+   
+
     const passwordEncrypt = bcrypt.hashSync(regis.password, 10)
 
     try {
