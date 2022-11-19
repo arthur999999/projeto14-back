@@ -1,8 +1,10 @@
 import { Router } from "express";
-import { getReg } from "../controllers/userControllet.js";
+import { getReg, postReg } from "../controllers/userControllet.js";
 import { tokenValidation } from "../middleware/tokenValidation.js";
 
 const userRouter = Router()
-userRouter.use('/regis',tokenValidation , getReg)
+userRouter.get('/regis',tokenValidation , getReg)
+userRouter.post('/registro', tokenValidation, postReg )
+
 
 export default userRouter
