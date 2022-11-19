@@ -18,12 +18,12 @@ export async function singUp (req, res) {
     const validation = regisSchamer.validate(regis, {abortEarly: false})
 
     if (validation.error){
-        res.status(422).send(validation.error.message)
+        res.status(401).send(validation.error.message)
         return
     }
 
     if (regis.password != regis.confirmPassword){
-        res.status(422).send('Confirme sua senha!')
+        res.status(401).send('Confirme sua senha!')
         return
     }
 
