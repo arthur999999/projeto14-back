@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb";
 import db from "../db.js";
 import joi from "joi";
+import dayjs from "dayjs"
 
 export async function getReg (req, res) {
     const id = req.userId
@@ -64,7 +65,8 @@ export async function postReg (req, res) {
             email: user.email,
             value: data.value,
             desc: data.desc,
-            type: data.type
+            type: data.type,
+            date: `${dayjs().date()}/${dayjs().month() + 1}`
         }
 
         await db.collection('registros').insertOne(newReg)
