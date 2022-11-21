@@ -31,11 +31,11 @@ export async function singUp (req, res) {
         const otherUser2 = await db.collection('Users').findOne({email: regis.email})
         
         if(otherUser2 ){
-            res.send('Email já cadastrado').status(409)
+            res.status(409).send('Email já cadastrado')
             return
         }
     } catch (error) {
-        res.send(error).status(422)
+        res.status(422).send(error)
         return
     }
 
